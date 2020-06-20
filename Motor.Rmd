@@ -3,9 +3,9 @@ title: "Motor Trends, fuel efficiency"
 author: "R Mofidi"
 date: "20/06/2020"
 output:
-  word_document: default
   pdf_document: default
   html_document: default
+  word_document: default
 ---
 
 # Are manual cars more fuel efficient than automatic cars? If so by how much? 
@@ -76,11 +76,19 @@ The following is a list of what these variables are recorded in a data frame wit
 [,10]	gear	Number of forward gears
 
 ```{r}
-summary(lm(mpg~am+cyl+hp+gear, mtcars))
+univar <- lm(mpg ~ am, data = mtcars)
+multivar<- lm(mpg~am+cyl+hp+gear, mtcars)
+summary(multivar)
+anova(univar, multivar)
 ```
 
 
 After accounting for these variables the association between transmission and fuel consumption (mpg) is less significant (P=0.0413). 
+
+```{r}
+par(mfrow = c(2,2))
+plot(multivar)
+```
 
 ### Quantify the MPG difference between automatic and manual transmissions?
 
